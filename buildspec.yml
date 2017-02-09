@@ -10,7 +10,7 @@ phases:
       - echo Build started on `date`
       - echo Compiling the Ruby code...
       - rspec HelloWorld_spec.rb
-      - $passdb = aws ssm get-parameters --names dbpassword --with-decryption --query "Parameters[].Value[]" --output text && echo $passdb
+      - passdb="$(aws ssm get-parameters --names dbpassword --with-decryption --query "Parameters[].Value[]" --output text)" && echo "${passdb}"
   post_build:
     commands:
       - echo Build completed on `date`
